@@ -25,6 +25,7 @@
 
 	let dragging = false;
 	let mouseX;
+	let touchInfo;
 	let bufferedX = 0;
 	const sensitivity = 20;
 	$: if (dragging && Math.abs(mouseX - bufferedX) > sensitivity) {
@@ -38,6 +39,7 @@
 <button on:click={() => move(true)}>LEFT</button>
 <button on:click={() => move()}>RIGHT</button>
 
+{JSON.stringify(touchInfo)}
 <div
 	on:mousedown={() => (dragging = true)}
 	on:mouseup={() => (dragging = false)}
@@ -56,7 +58,7 @@
 	</div>
 </div>
 
-<svelte:window on:touch={(e) => (mouseX = e.clientX)} on:mousemove={(e) => (mouseX = e.clientX)} />
+<svelte:window on:touch={(e) => (touchInfo = e)} on:mousemove={(e) => (mouseX = e.clientX)} />
 
 <style lang="scss">
 	.gallery-container {

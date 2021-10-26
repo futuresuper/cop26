@@ -33,7 +33,6 @@
 		rel="apple-touch-icon"
 		href="https://www.futuresuper.com.au/images/favicon/apple-touch-icon.png"
 	/>
-	<link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet" />
 </svelte:head>
 
 <slot />

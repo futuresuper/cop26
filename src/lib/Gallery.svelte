@@ -49,7 +49,7 @@
 		{#each tiles as tile}
 			<div class="tile-container">
 				<div class="tile {tile[1]}">
-					{tile[0] + dragging}
+					{mouseX + ' - ' + dragging}
 				</div>
 			</div>
 		{/each}

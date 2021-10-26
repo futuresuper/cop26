@@ -39,9 +39,10 @@
 <button on:click={() => move()}>RIGHT</button>
 
 <div
-	on:mouseup={() => (dragging = false)}
 	on:mousedown={() => (dragging = true)}
+	on:mouseup={() => (dragging = false)}
 	on:touchstart={() => (dragging = true)}
+	on:touchend={() => (dragging = false)}
 	class="gallery-container"
 >
 	<div class="gallery">
@@ -55,7 +56,7 @@
 	</div>
 </div>
 
-<svelte:window on:mousemove={(e) => (mouseX = e.clientX)} />
+<svelte:window on:touch={(e) => (mouseX = e.clientX)} on:mousemove={(e) => (mouseX = e.clientX)} />
 
 <style lang="scss">
 	.gallery-container {

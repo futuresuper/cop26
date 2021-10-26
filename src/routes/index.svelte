@@ -1,2 +1,13 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+	// import Header from '$lib/Header.svelte';
+
+	import { onMount } from 'svelte';
+	onMount(async () => {
+		// To do
+	});
+</script>
+
+<div>Hello world</div>
+
+<style>
+</style>

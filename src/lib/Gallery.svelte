@@ -222,7 +222,7 @@
 	}
 
 	.download-button {
-		margin: 0 auto 400px;
+		margin: 0 auto;
 		max-width: 600px;
 		border: 1px solid var(--white);
 		font-family: var(--knockout);

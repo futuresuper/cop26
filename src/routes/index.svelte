@@ -1,6 +1,7 @@
 <script>
 	// import Header from '$lib/Header.svelte';
 	import Tiles from '$lib/Tiles.svelte';
+	import Grid from '$lib/Grid.svelte';
 </script>
 
 <div class="container">
@@ -23,6 +24,7 @@
 		</p>
 	</div>
 	<Tiles />
+	<Grid />
 </div>
 
 <style lang="scss">

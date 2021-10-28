@@ -43,6 +43,10 @@
 	<div class="item {selected ? 'selected' : ''}">Share my own</div>
 </div>
 <Gallery {allTiles} {customTextOn} />
+<div class="text">
+	Australia is
+	<div class="hashtag">#NOTMUTEONCLIMATE</div>
+</div>
 
 <style lang="scss">
 	.toggle {
@@ -70,6 +74,15 @@
 		background-color: var(--white);
 		color: var(--black);
 		border-radius: 100px;
+	}
+
+	.text {
+		text-align: center;
+		margin: 60px 0;
+		.hashtag {
+			font-family: var(--knockout);
+			font-size: max(3vw, 28px);
+		}
 	}
 
 	@media (max-width: 600px) {

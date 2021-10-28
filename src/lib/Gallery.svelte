@@ -6,6 +6,9 @@
 	export let allTiles;
 	let showDownloadOverlay = false;
 
+	export let customTextOn = false;
+	let customText = '';
+
 	let selectedTile = 2;
 	let tiles = [];
 	$: if (selectedTile > -1) {
@@ -69,12 +72,18 @@
 		{#each tiles as tile, i}
 			<div class="tile-container">
 				<div id="tile-{i}" class="tile {tile.theme}">
-					{tile.text}
+					<div class="spacer" />
+					<div class="text">{customTextOn ? customText : tile.text}</div>
+					<div class="hashtag">#NOTMUTEONCLIMATE</div>
 				</div>
 			</div>
 		{/each}
 	</div>
 </div>
+{#if customTextOn}
+	<input bind:value={customText} type="text" placeholder="Write your text here" />
+{/if}
+
 <div on:click={() => handleDownload()} class="download-button">Download your tile to share</div>
 
 <style lang="scss">
@@ -89,7 +98,7 @@
 			height: 36vw;
 			background-color: black;
 			z-index: 3;
-			opacity: 0.7;
+			opacity: 0.8;
 		}
 		.arrows {
 			position: absolute;
@@ -128,32 +137,58 @@
 			margin-right: -3vw;
 			width: 27vw;
 			font-size: 3.3vw;
+			.hashtag {
+				font-size: 1.4vw;
+			}
+			.spacer {
+				height: 1.4vw;
+			}
 		}
 		&:nth-child(3) {
 			font-size: 5vw;
+			.hashtag {
+				font-size: max(2vw, 13px);
+			}
+			.spacer {
+				height: 2vw;
+			}
 		}
 		&:nth-child(4) {
 			margin-left: -3vw;
 			width: 27vw;
 			font-size: 3.3vw;
+			.hashtag {
+				font-size: 1.4vw;
+			}
+			.spacer {
+				height: 1.4vw;
+			}
 		}
 		&:nth-child(1),
 		&:nth-child(5) {
 			margin: 0 -2vw;
 			width: 13vw;
 			font-size: 1.4vw;
+			.hashtag {
+				font-size: 0.8vw;
+			}
+			.spacer {
+				height: 0.8vw;
+			}
 		}
 	}
 
 	.tile {
 		height: 100%;
 		display: flex;
-		justify-content: center;
+		flex-direction: column;
+		justify-content: space-between;
 		align-items: center;
 		text-align: center;
 		font-family: var(--knockout);
 		padding: 2vw;
 		user-select: none;
+		text-transform: uppercase;
 
 		&.ball {
 			background-image: url('/images/ball.png');
@@ -191,14 +226,30 @@
 		max-width: 600px;
 		border: 1px solid var(--white);
 		font-family: var(--knockout);
-		font-size: 3vw;
+		font-size: max(3vw, 20px);
 		text-align: center;
 		padding: 20px;
 		text-transform: uppercase;
 		cursor: pointer;
+		user-select: none;
 		&:hover {
 			background-color: var(--white);
 			color: var(--black);
 		}
+	}
+
+	input {
+		width: calc(100% - 40px);
+		padding: 8px;
+		background-color: var(--black);
+		color: var(--white);
+		font-family: var(--knockout);
+		font-size: 6vw;
+		text-align: center;
+		border: 0;
+		border-bottom: 1px solid white;
+		outline: 0;
+		margin: -40px 20px 40px;
+		text-transform: uppercase;
 	}
 </style>

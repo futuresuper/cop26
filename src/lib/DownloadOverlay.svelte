@@ -19,7 +19,25 @@
 		const el = document.getElementById('image-container');
 		console.log(el);
 	}
+
+	let width;
+	let mobile;
+	let forceMobile = false;
+	let forceDesktop = false;
+	$: if (forceMobile) {
+		mobile = true;
+		forceDesktop = false;
+	} else if (forceDesktop) {
+		mobile = false;
+		forceMobile = false;
+	} else if (width < 900) {
+		mobile = true;
+	} else {
+		mobile = false;
+	}
 </script>
+
+<svelte:window bind:innerWidth={width} />
 
 <section>
 	<div class="close-container">
@@ -28,18 +46,18 @@
 		</div>
 	</div>
 	<div id="image-container" />
-	<h3>How to download</h3>
-	<div class="mobile">
-		<h2>Phone or tablet</h2>
-		<p>
-			On most phones, if you press and hold on the above image, you'll see options to save or share
-			the image
-		</p>
-	</div>
-	<div class="desktop">
-		<h2>Computer</h2>
-		<p>Right click on the above image and choose 'Save Image As...' or similar</p>
-	</div>
+
+	{#if mobile}
+		<h3>How to download and share</h3>
+		<p>On most phones, press and hold the above image and you'll see an option to save.</p>
+		<p>You can then share it to Instagram, Facebook and more from your photo library.</p>
+		<p on:click={() => (forceDesktop = true)} class="small">Desktop computer instructions</p>
+	{:else}
+		<h3>How to download and share</h3>
+		<p>Right click on the above image and choose 'Save Image As...' or similar.</p>
+		<p>You can then upload and share it to Instagram, Facebook and more.</p>
+		<p on:click={() => (forceMobile = true)} class="small">Mobile/tablet instructions</p>
+	{/if}
 </section>
 
 <style lang="scss">
@@ -82,5 +100,13 @@
 	p {
 		margin-bottom: 0;
 		text-align: center;
+	}
+
+	.small {
+		margin-top: 40px;
+		color: grey;
+		font-size: 14px;
+		text-decoration: underline;
+		cursor: pointer;
 	}
 </style>

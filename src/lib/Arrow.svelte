@@ -3,8 +3,7 @@
 </script>
 
 <svg
-	width="99"
-	height="182"
+	width="5vw"
 	style="transform: rotate({rotate}deg);"
 	viewBox="0 0 99 182"
 	fill="none"

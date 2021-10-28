@@ -1,7 +1,7 @@
 <script>
 	import '../app.css';
-	const title = 'COP26';
-	const desc = 'COP26';
+	const title = 'Not Mute On Climate';
+	const desc = 'Share your action to inspire action.';
 	const image = 'https://www.futuresuper.com.au/images/future-super-og.png';
 </script>
 

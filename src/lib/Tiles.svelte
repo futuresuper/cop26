@@ -25,13 +25,24 @@
 				allTiles = data.prefilled;
 			});
 	});
+
+	let customTextOn;
+	let customText;
+	function handleToggle() {
+		selected = !selected;
+		if (selected) {
+			customTextOn = true;
+		} else {
+			customTextOn = false;
+		}
+	}
 </script>
 
-<div class="toggle" on:click={() => (selected = !selected)}>
+<div class="toggle" on:click={() => handleToggle()}>
 	<div class="item {!selected ? 'selected' : ''}">Pre-filled actions</div>
 	<div class="item {selected ? 'selected' : ''}">Share my own</div>
 </div>
-<Gallery {allTiles} />
+<Gallery {allTiles} {customTextOn} />
 
 <style lang="scss">
 	.toggle {

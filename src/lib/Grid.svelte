@@ -1,74 +1,42 @@
 <script>
-	let items = [
-		{
-			src: '/images/smudge.png',
-			alt: 'An image',
-			colSpan: 2,
-			rowSpan: 1
-		},
-		{
-			src: '/images/smudge.png',
-			alt: 'An image',
-			colSpan: 3,
-			rowSpan: 1
-		},
-		{
-			src: '/images/smudge.png',
-			alt: 'An image',
-			colSpan: 1,
-			rowSpan: 1
-		},
-		{
-			src: '/images/smudge.png',
-			alt: 'An image',
-			colSpan: 1,
-			rowSpan: 2
-		},
-		{
-			src: '/images/smudge.png',
-			alt: 'An image',
-			colSpan: 1,
-			rowSpan: 1
-		},
-		{
-			src: '/images/smudge.png',
-			alt: 'An image',
-			colSpan: 1,
-			rowSpan: 1
-		},
-		{
-			src: '/images/smudge.png',
-			alt: 'An image',
-			colSpan: 1,
-			rowSpan: 1
-		}
-	];
+	export let wallTiles = [];
 </script>
 
 <section>
-	<div class="grid">
-		{#each items as item}
-			<div
-				class="item-container"
-				style="grid-column: span {item.colSpan}; grid-row: span {item.rowSpan};"
-			>
-				<img src={item.src} alt={item.alt} />
-			</div>
-		{/each}
+	<div class="marquee">
+		<div class="grid">
+			{#each wallTiles as item}
+				<div
+					class="item-container"
+					style="grid-column: span {item.cols}; grid-row: span {item.rows};"
+				>
+					<img src={item.src} alt={item.desc} />
+				</div>
+			{/each}
+		</div>
 	</div>
 </section>
 
 <style lang="scss">
 	section {
+		width: calc(100% + 40px);
+		height: calc(75vh + 80px);
+		position: relative;
 		background-color: var(--white);
 		margin: 0 -20px;
 		overflow: hidden;
 	}
 
+	.marquee {
+		background-color: var(--white);
+		position: absolute;
+		animation: marquee 25s linear infinite;
+	}
+
 	.grid {
 		display: grid;
 		width: 100%;
-		padding: 20px 0 20px 20px;
+		padding: 20px;
 		grid-auto-columns: 25vh;
 		grid-template-rows: repeat(3, 25vh);
 		grid-gap: 20px;
@@ -84,5 +52,14 @@
 	img {
 		width: 100%;
 		height: 100%;
+	}
+
+	@keyframes marquee {
+		0% {
+			left: 0px;
+		}
+		100% {
+			left: -100vw;
+		}
 	}
 </style>

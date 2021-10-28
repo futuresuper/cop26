@@ -1,5 +1,6 @@
 <script>
 	import Gallery from '$lib/Gallery.svelte';
+	import Grid from '$lib/Grid.svelte';
 
 	export let selected = false;
 
@@ -14,6 +15,8 @@
 		{ text: 'TAG A MATE WHOS TAKING CLIMATE ACTION', theme: 'black' }
 	];
 
+	let wallTiles = [];
+
 	import { onMount } from 'svelte';
 	onMount(async () => {
 		const url = 'https://67l8qspd50.execute-api.ap-southeast-2.amazonaws.com/prod/coptiles';
@@ -23,6 +26,8 @@
 			})
 			.then(function (data) {
 				allTiles = data.prefilled;
+				wallTiles = data.wall;
+				console.log(data.wall);
 			});
 	});
 
@@ -47,6 +52,7 @@
 	Australia is
 	<div class="hashtag">#NOTMUTEONCLIMATE</div>
 </div>
+<Grid {wallTiles} />
 
 <style lang="scss">
 	.toggle {

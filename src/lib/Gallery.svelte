@@ -98,22 +98,22 @@
 		padding: 2vw;
 
 		&.ball {
-			background-image: url(./images/ball.png);
+			background-image: url(/images/ball.png);
 			background-size: cover;
 			color: black;
 		}
 		&.smudge {
-			background-image: url(./images/smudge.png);
+			background-image: url(/images/smudge.png);
 			background-size: cover;
 			color: black;
 		}
 		&.rally {
-			background-image: url(./images/rally.png);
+			background-image: url(/images/rally.png);
 			background-size: cover;
 			color: white;
 		}
 		&.white {
-			background-image: url(./images/bw-smudge.png);
+			background-image: url(/images/bw-smudge.png);
 			background-size: cover;
 			color: white;
 		}

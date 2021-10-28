@@ -1,11 +1,6 @@
 <script>
 	// import Header from '$lib/Header.svelte';
 	import Tiles from '$lib/Tiles.svelte';
-
-	import { onMount } from 'svelte';
-	onMount(async () => {
-		// To do
-	});
 </script>
 
 <div class="container">

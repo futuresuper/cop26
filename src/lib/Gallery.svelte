@@ -1,64 +1,43 @@
 <script>
-	let allTiles = [
-		['Blah blah 1', 'blue'],
-		['Blah blah 2', 'pink'],
-		['Blah blah 3', 'black'],
-		['Blah blah 4', 'green'],
-		['Blah blah 5', 'red'],
-		['Blah blah 6', 'purple']
-	];
+	export let allTiles;
 
-	let tiles = allTiles.slice(0, 5);
-	// $: tiles = allTiles.slice(0, 5);
-	// $: console.log(tiles);
-
-	function move(left) {
-		console.log(left ? 'MOVING LEFT' : 'MOVING RIGHT');
-		const t = [...allTiles];
-		const tl = t.length;
-		allTiles = left
-			? [...t.slice(1, tl), ...t.slice(0, 1)]
-			: [...t.slice(tl - 1, tl), ...t.slice(0, tl - 1)];
-		// console.log(allTiles);
-		tiles = allTiles.slice(0, 5);
+	let selectedTile = 2;
+	let tiles = [];
+	$: if (selectedTile > -1) {
+		const at = allTiles;
+		const st = selectedTile;
+		tiles[0] = allTiles[st - 2 < 0 ? st + at.length - 2 : st - 2];
+		tiles[1] = allTiles[st - 1 < 0 ? st + at.length - 1 : st - 1];
+		tiles[2] = allTiles[st];
+		tiles[3] = allTiles[st + 1 === at.length ? 0 : st + 1];
+		tiles[4] = allTiles[st + 2 >= at.length ? st - at.length + 2 : st + 2];
 	}
 
-	let dragging = false;
-	let mouseX;
-	let touchInfo;
-	let bufferedX = 0;
-	const sensitivity = 20;
-	$: if (dragging && Math.abs(mouseX - bufferedX) > sensitivity) {
-		console.log(bufferedX + ' | ' + mouseX);
-		// console.log('MOVE: ' + mouseX < bufferedX);
-		move(mouseX < bufferedX);
-		bufferedX = mouseX;
+	function updateSelectedTile(i) {
+		if (i >= allTiles.length) {
+			selectedTile = i - allTiles.length;
+		} else if (i < 0) {
+			selectedTile = i + allTiles.length;
+		} else {
+			selectedTile = i;
+		}
 	}
 </script>
 
-<button on:click={() => move(true)}>LEFT</button>
-<button on:click={() => move()}>RIGHT</button>
-
-{JSON.stringify(touchInfo)}
-<div
-	on:mousedown={() => (dragging = true)}
-	on:mouseup={() => (dragging = false)}
-	on:touchstart={() => (dragging = true)}
-	on:touchend={() => (dragging = false)}
-	class="gallery-container"
->
+<button on:click={() => updateSelectedTile(selectedTile - 1)}> LEFT </button>
+<button on:click={() => updateSelectedTile(selectedTile + 1)}> RIGHT </button>
+{selectedTile}
+<div class="gallery-container">
 	<div class="gallery">
-		{#each tiles as tile}
+		{#each tiles as tile, i}
 			<div class="tile-container">
-				<div class="tile {tile[1]}">
-					{mouseX + ' - ' + dragging}
+				<div on:click={() => updateSelectedTile(selectedTile + i - 2)} class="tile {tile.theme}">
+					{tile.text}
 				</div>
 			</div>
 		{/each}
 	</div>
 </div>
-
-<svelte:window on:touch={(e) => (touchInfo = e)} on:mousemove={(e) => (mouseX = e.clientX)} />
 
 <style lang="scss">
 	.gallery-container {
@@ -91,41 +70,61 @@
 		&:nth-child(2) {
 			margin-right: -3vw;
 			width: 27vw;
+			font-size: 3.3vw;
+		}
+		&:nth-child(3) {
+			font-size: 5vw;
 		}
 		&:nth-child(4) {
 			margin-left: -3vw;
 			width: 27vw;
+			font-size: 3.3vw;
 		}
 		&:nth-child(1),
 		&:nth-child(5) {
 			margin: 0 -2vw;
 			width: 13vw;
+			font-size: 1.4vw;
 		}
 	}
 
 	.tile {
-		border: 1px solid white;
 		height: 100%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		&.blue {
-			background-color: blue;
+		text-align: center;
+		font-family: var(--knockout);
+		padding: 2vw;
+
+		&.ball {
+			background-image: url(images/ball.png);
+			background-size: cover;
+			color: black;
 		}
-		&.pink {
-			background-color: pink;
+		&.smudge {
+			background-image: url(images/smudge.png);
+			background-size: cover;
+			color: black;
+		}
+		&.rally {
+			background-image: url(images/rally.png);
+			background-size: cover;
+			color: white;
+		}
+		&.white {
+			background-image: url(images/bw-smudge.png);
+			background-size: cover;
+			color: white;
 		}
 		&.black {
 			background-color: black;
+			color: white;
+			border: 1px solid white;
 		}
-		&.green {
-			background-color: green;
-		}
-		&.red {
-			background-color: red;
-		}
-		&.purple {
-			background-color: purple;
+		&.blue {
+			background-color: var(--blue);
+			color: white;
 		}
 	}
 </style>

@@ -58,7 +58,7 @@
 		grid-template-columns: 1fr 1fr;
 		margin: 0 -20px;
 		border-top: 1px solid var(--black);
-		border-bottom: 1px solid var(--black);
+		border-bottom: 1px solid var(--white);
 	}
 	.circle {
 		background-image: url(/images/ball.png);

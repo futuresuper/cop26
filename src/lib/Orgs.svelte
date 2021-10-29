@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 
 	export let orgs = [];
+
 	let showing = 5;
 	let orgsBefore = [];
 	$: orgsBefore = [...orgs.slice(showing + 1, orgs.length), ...orgs.slice(0, showing)];
@@ -20,21 +21,23 @@
 		<div class="namesBefore">
 			{#if orgsBefore.length > 0}
 				{#each orgsBefore as org}
-					<div class="name grey">
+					<div class="name grey {org.name.length > 20 ? 'long' : ''}">
 						{org.name}
 					</div>
 				{/each}
 			{/if}
 		</div>
 		<div class="highlight-name">
-			<div class="name">
-				{orgs.length > 0 ? orgs[showing].name : 'Loading...'}
-			</div>
+			{#if orgs.length > 0}
+				<div class="name {orgs[showing].name.length > 20 > 0 ? 'long' : ''}">
+					{orgs[showing].name}
+				</div>
+			{/if}
 		</div>
 		<div class="namesAfter">
 			{#if orgsAfter.length > 0}
 				{#each orgsAfter as org}
-					<div class="name grey">
+					<div class="name grey {org.name.length > 20 ? 'long' : ''}">
 						{org.name}
 					</div>
 				{/each}
@@ -55,7 +58,7 @@
 
 <style lang="scss">
 	.section-container {
-		height: 59vh;
+		height: 56vh;
 		overflow: hidden;
 		display: flex;
 		align-items: center;
@@ -98,6 +101,9 @@
 		text-align: right;
 		font-family: var(--knockout);
 		color: var(--blue);
+		&.long {
+			// font-size: 1vw;
+		}
 		&.grey {
 			color: #333333;
 		}

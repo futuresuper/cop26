@@ -4,6 +4,7 @@
 	import Tiles from '$lib/Tiles.svelte';
 	import Wall from '$lib/Wall.svelte';
 	import Orgs from '$lib/Orgs.svelte';
+	import Info from '$lib/Info.svelte';
 	import { onMount } from 'svelte';
 
 	let hideSite = true;
@@ -41,6 +42,7 @@
 		<Tiles {allTiles} />
 		<Wall {userTiles} {wallTiles} />
 		<Orgs {orgs} />
+		<Info />
 	{/if}
 </div>
 

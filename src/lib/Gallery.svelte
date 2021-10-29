@@ -32,16 +32,31 @@
 
 	let img;
 	let status = 'not started';
-	let dataU = '';
+
+	function getImgUrl(dataUrl) {
+		fetch('https://67l8qspd50.execute-api.ap-southeast-2.amazonaws.com/prod/image', {
+			method: 'post',
+			body: JSON.stringify({
+				image: dataUrl
+			})
+		})
+			.then(function (response) {
+				return response.json();
+			})
+			.then(function (data) {
+				img = data;
+			});
+	}
+
 	function handleDownload() {
 		status = 'getting dl ready';
 		var node = document.getElementById('image-tile');
 
 		htmlToImage
-			.toJpeg(node)
+			.toPng(node)
 			.then(function (dataUrl) {
 				status = 'got data url - creating image';
-				img = dataUrl;
+				getImgUrl(dataUrl);
 				/*
 				dataU = dataUrl;
 				let newImg = new Image();
@@ -100,7 +115,7 @@
 {/if}
 
 <p>STATUS: {status}</p>
-<p>DATA: {dataU}</p>
+<p>DATA: {img}</p>
 <div id="test-container">
 	<img src={img} alt="Your tile ready to download" style="height: 100px;width:100px" />
 </div>

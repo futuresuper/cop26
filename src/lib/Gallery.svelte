@@ -41,13 +41,17 @@
 			.toPng(node)
 			.then(function (dataUrl) {
 				status = 'got data url - creating image';
+				img = dataUrl;
+				/*
 				dataU = dataUrl;
 				let newImg = new Image();
 				newImg.src = dataUrl;
+
 				img = newImg;
 				status = 'Image created';
 				document.getElementById('test-container').appendChild(img);
 				// showDownloadOverlay = true;
+        */
 			})
 			.catch(function (error) {
 				console.error('oops, something went wrong!', error);
@@ -97,7 +101,9 @@
 
 <p>STATUS: {status}</p>
 <p>DATA: {dataU}</p>
-<div id="test-container" />
+<div id="test-container">
+	<img src={img} alt="Your tile ready to download" style="height: 100px;width:100px" />
+</div>
 
 <div on:click={() => handleDownload()} class="download-button">Download your tile to share</div>
 

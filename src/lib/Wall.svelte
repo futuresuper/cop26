@@ -63,4 +63,17 @@
 			left: -100vw;
 		}
 	}
+
+	@media (max-width: 700px) {
+		section {
+			height: calc(150vw + 80px);
+		}
+
+		.grid {
+			grid-auto-columns: 30vw;
+			grid-template-rows: repeat(5, 30vw);
+			grid-gap: 10px;
+			grid-auto-flow: column dense;
+		}
+	}
 </style>

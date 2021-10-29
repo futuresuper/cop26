@@ -32,6 +32,7 @@
 
 	let img;
 	let status = 'not started';
+	let dataU = '';
 	function handleDownload() {
 		status = 'getting dl ready';
 		var node = document.getElementById('image-tile');
@@ -40,11 +41,13 @@
 			.toPng(node)
 			.then(function (dataUrl) {
 				status = 'got data url - creating image';
+				dataU = dataUrl;
 				let newImg = new Image();
 				newImg.src = dataUrl;
 				img = newImg;
 				status = 'Image created';
-				showDownloadOverlay = true;
+				document.getElementById('test-container').appendChild(img);
+				// showDownloadOverlay = true;
 			})
 			.catch(function (error) {
 				console.error('oops, something went wrong!', error);
@@ -92,7 +95,10 @@
 	<input bind:value={customText} type="text" placeholder="Share the action you take" />
 {/if}
 
-{status}
+<p>STATUS: {status}</p>
+<p>DATA: {dataU}</p>
+<div id="test-container" />
+
 <div on:click={() => handleDownload()} class="download-button">Download your tile to share</div>
 
 <style lang="scss">

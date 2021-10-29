@@ -28,27 +28,52 @@
 		} else {
 			selectedTile = i;
 		}
+		updateSvg();
 	}
 
 	let img;
+	let svgImg;
 	let status = 'not started';
 
-	// function getImgUrl(el) {
-	// 	fetch('https://67l8qspd50.execute-api.ap-southeast-2.amazonaws.com/prod/image', {
-	// 		method: 'post',
-	// 		body: JSON.stringify({
-	// 			image: el
-	// 		})
-	// 	})
-	// 		.then(function (response) {
-	// 			return response.json();
-	// 		})
-	// 		.then(function (data) {
-	// 			img = data;
-	// 		});
-	// }
+	function getImgUrl(el) {
+		fetch('https://67l8qspd50.execute-api.ap-southeast-2.amazonaws.com/prod/image', {
+			method: 'post',
+			body: JSON.stringify({
+				image: el
+			})
+		})
+			.then(function (response) {
+				return response.json();
+			})
+			.then(function (data) {
+				img = data;
+			});
+	}
 
 	function handleDownload() {
+		var node = document.getElementById('image-tile2');
+		htmlToImage
+			.toPng(node)
+			.then(function (dataUrl) {
+				status = 'got data url - creating image';
+				img = dataUrl;
+				getImgUrl(dataUrl);
+
+				// dataU = dataUrl;
+				// let newImg = new Image();
+				// newImg.src = dataUrl;
+
+				// img = newImg;
+				// status = 'Image created';
+				// document.getElementById('test-container').appendChild(img);
+				// showDownloadOverlay = true;
+			})
+			.catch(function (error) {
+				console.error('oops, something went wrong!', error);
+			});
+	}
+
+	function updateSvg() {
 		status = 'getting dl ready';
 		var node = document.getElementById('image-tile');
 
@@ -56,8 +81,10 @@
 			.toSvg(node)
 			.then(function (dataUrl) {
 				status = 'got data url - creating image';
-				img = dataUrl;
-				// getImgUrl(dataUrl);
+				svgImg = dataUrl;
+				// let newImg = new Image();
+				// newImg.src = dataUrl;
+				svgToPng();
 
 				// dataU = dataUrl;
 				// let newImg = new Image();
@@ -86,6 +113,9 @@
 		<div class="spacer" />
 		<div class="text">{customTextOn ? customText : tiles[2] ? tiles[2].text : 'Loading...'}</div>
 		<div class="hashtag">#NOTMUTEONCLIMATE</div>
+	</div>
+	<div id="image-tile2">
+		<img src={svgImg} alt="this" />
 	</div>
 </div>
 <div class="gallery-container">
@@ -117,7 +147,7 @@
 <p>STATUS: {status}</p>
 <p>DATA: {img}</p>
 <div id="test-container">
-	<img src={img} alt="Your tile ready to download" style="height: 100px;width:100px" />
+	<img id="theSvg" src={img} alt="Your tile ready to download" style="height: 100px;width:100px" />
 </div>
 
 <div on:click={() => handleDownload()} class="download-button">Download your tile to share</div>
@@ -304,5 +334,10 @@
 		.spacer {
 			height: 50px;
 		}
+	}
+
+	#image-tile2 {
+		width: 800px;
+		height: 800px;
 	}
 </style>

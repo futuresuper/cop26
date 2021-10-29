@@ -36,6 +36,7 @@
 	let status = 'not started';
 
 	function getImgUrl(el) {
+		console.log(el);
 		fetch('https://67l8qspd50.execute-api.ap-southeast-2.amazonaws.com/prod/image', {
 			method: 'post',
 			body: JSON.stringify({
@@ -46,6 +47,7 @@
 				return response.json();
 			})
 			.then(function (data) {
+				console.log(data);
 				img = data;
 			});
 	}
@@ -78,13 +80,15 @@
 		var node = document.getElementById('image-tile');
 
 		htmlToImage
-			.toSvg(node)
-			.then(function (dataUrl) {
-				status = 'got data url - creating image';
-				svgImg = dataUrl;
+			.toCanvas(node)
+			.then(function (canvas) {
+				document.getElementById('test-container').appendChild(canvas);
+				// status = 'got data url - creating image';
+				// svgImg = dataUrl;
+				// console.log(dataUrl);
 				// let newImg = new Image();
 				// newImg.src = dataUrl;
-				svgToPng();
+				// getImgUrl(newImg);
 
 				// dataU = dataUrl;
 				// let newImg = new Image();
@@ -147,7 +151,7 @@
 <p>STATUS: {status}</p>
 <p>DATA: {img}</p>
 <div id="test-container">
-	<img id="theSvg" src={img} alt="Your tile ready to download" style="height: 100px;width:100px" />
+	<!-- <img id="theSvg" src={img} alt="Your tile ready to download" style="height: 100px;width:100px" /> -->
 </div>
 
 <div on:click={() => handleDownload()} class="download-button">Download your tile to share</div>

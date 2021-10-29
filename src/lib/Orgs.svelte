@@ -41,6 +41,15 @@
 	</div>
 	<div class="are-not-mute">&nbsp;ARE&nbsp;NOT&nbsp;MUTE</div>
 </section>
+<aside>
+	<p>
+		Are you part of a climate action group? Show the great action you’re taking by adding your name
+		to the list.
+	</p>
+	<a href="https://docs.google.com/forms/d/1-iWnNqaumuQrqM6Kxl_QTm3ya9LviKclLGDPTlGQHO4/"
+		>ADD YOUR CLIMATE ACTION GROUP</a
+	>
+</aside>
 
 <style lang="scss">
 	section {
@@ -83,6 +92,30 @@
 		color: var(--blue);
 		&.grey {
 			color: #333333;
+		}
+	}
+
+	aside {
+		background-color: var(--white);
+		width: 100%;
+		color: var(--black);
+		padding: 80px 20px;
+		text-align: center;
+		p {
+			margin-bottom: 40px;
+		}
+		a {
+			padding: 20px 40px;
+			border: 1px solid var(--black);
+			color: var(--black);
+			text-decoration: none;
+			font-family: var(--knockout);
+			font-size: max(20px, 2vw);
+			&:hover {
+				background-color: var(--black);
+				color: var(--white);
+				cursor: pointer;
+			}
 		}
 	}
 </style>

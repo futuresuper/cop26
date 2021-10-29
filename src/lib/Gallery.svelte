@@ -33,40 +33,40 @@
 	let img;
 	let status = 'not started';
 
-	function getImgUrl(dataUrl) {
-		fetch('https://67l8qspd50.execute-api.ap-southeast-2.amazonaws.com/prod/image', {
-			method: 'post',
-			body: JSON.stringify({
-				image: dataUrl
-			})
-		})
-			.then(function (response) {
-				return response.json();
-			})
-			.then(function (data) {
-				img = data;
-			});
-	}
+	// function getImgUrl(el) {
+	// 	fetch('https://67l8qspd50.execute-api.ap-southeast-2.amazonaws.com/prod/image', {
+	// 		method: 'post',
+	// 		body: JSON.stringify({
+	// 			image: el
+	// 		})
+	// 	})
+	// 		.then(function (response) {
+	// 			return response.json();
+	// 		})
+	// 		.then(function (data) {
+	// 			img = data;
+	// 		});
+	// }
 
 	function handleDownload() {
 		status = 'getting dl ready';
 		var node = document.getElementById('image-tile');
 
 		htmlToImage
-			.toPng(node)
+			.toSvg(node)
 			.then(function (dataUrl) {
 				status = 'got data url - creating image';
-				getImgUrl(dataUrl);
-				/*
-				dataU = dataUrl;
-				let newImg = new Image();
-				newImg.src = dataUrl;
+				img = dataUrl;
+				// getImgUrl(dataUrl);
 
-				img = newImg;
-				status = 'Image created';
-				document.getElementById('test-container').appendChild(img);
+				// dataU = dataUrl;
+				// let newImg = new Image();
+				// newImg.src = dataUrl;
+
+				// img = newImg;
+				// status = 'Image created';
+				// document.getElementById('test-container').appendChild(img);
 				// showDownloadOverlay = true;
-        */
 			})
 			.catch(function (error) {
 				console.error('oops, something went wrong!', error);

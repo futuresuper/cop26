@@ -77,7 +77,7 @@
 	</div>
 </div>
 {#if customTextOn}
-	<input bind:value={customText} type="text" placeholder="Write your text here" />
+	<input bind:value={customText} type="text" placeholder="Share the action you take" />
 {/if}
 
 <div on:click={() => handleDownload()} class="download-button">Download your tile to share</div>

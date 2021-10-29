@@ -15,32 +15,34 @@
 	});
 </script>
 
-<section>
-	<div class="namesBefore">
-		{#if orgsBefore.length > 0}
-			{#each orgsBefore as org}
-				<div class="name grey">
-					{org.name}
-				</div>
-			{/each}
-		{/if}
-	</div>
-	<div class="highlight-name">
-		<div class="name">
-			{orgs.length > 0 ? orgs[showing].name : 'Loading...'}
+<div class="section-container">
+	<section>
+		<div class="namesBefore">
+			{#if orgsBefore.length > 0}
+				{#each orgsBefore as org}
+					<div class="name grey">
+						{org.name}
+					</div>
+				{/each}
+			{/if}
 		</div>
-	</div>
-	<div class="namesAfter">
-		{#if orgsAfter.length > 0}
-			{#each orgsAfter as org}
-				<div class="name grey">
-					{org.name}
-				</div>
-			{/each}
-		{/if}
-	</div>
-	<div class="are-not-mute">&nbsp;ARE&nbsp;NOT&nbsp;MUTE</div>
-</section>
+		<div class="highlight-name">
+			<div class="name">
+				{orgs.length > 0 ? orgs[showing].name : 'Loading...'}
+			</div>
+		</div>
+		<div class="namesAfter">
+			{#if orgsAfter.length > 0}
+				{#each orgsAfter as org}
+					<div class="name grey">
+						{org.name}
+					</div>
+				{/each}
+			{/if}
+		</div>
+		<div class="are-not-mute">&nbsp;ARE&nbsp;NOT&nbsp;MUTE</div>
+	</section>
+</div>
 <aside>
 	<p>
 		Are you part of a climate action group? Show the great action you’re taking by adding your name
@@ -52,6 +54,12 @@
 </aside>
 
 <style lang="scss">
+	.section-container {
+		height: 59vh;
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+	}
 	section {
 		margin: 0 auto;
 		display: grid;
@@ -97,7 +105,8 @@
 
 	aside {
 		background-color: var(--white);
-		width: 100%;
+		margin: 0 -20px;
+		width: calc(100% + 40px);
 		color: var(--black);
 		padding: 80px 20px;
 		text-align: center;

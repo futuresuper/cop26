@@ -6,6 +6,8 @@
 	import Orgs from '$lib/Orgs.svelte';
 	import { onMount } from 'svelte';
 
+	let hideSite = true;
+
 	let allTiles;
 	let userTiles;
 	let wallTiles;
@@ -23,14 +25,23 @@
 				wallTiles = data.wall;
 				orgs = data.orgs;
 			});
+		if (window.location.hostname.includes('notmuteonclimate.com')) {
+			hideSite = true;
+		} else {
+			hideSite = false;
+		}
 	});
 </script>
 
 <div class="container">
-	<Header />
-	<Tiles {allTiles} />
-	<Wall {userTiles} {wallTiles} />
-	<Orgs {orgs} />
+	{#if hideSite}
+		<h1>Coming soon...</h1>
+	{:else}
+		<Header />
+		<Tiles {allTiles} />
+		<Wall {userTiles} {wallTiles} />
+		<Orgs {orgs} />
+	{/if}
 </div>
 
 <style lang="scss">

@@ -31,14 +31,19 @@
 	}
 
 	let img;
+	let status = 'not started';
 	function handleDownload() {
-		var node = document.getElementById('tile-2');
+		status = 'getting dl ready';
+		var node = document.getElementById('image-tile');
 
 		htmlToImage
 			.toPng(node)
 			.then(function (dataUrl) {
-				img = new Image();
-				img.src = dataUrl;
+				status = 'got data url - creating image';
+				let newImg = new Image();
+				newImg.src = dataUrl;
+				img = newImg;
+				status = 'Image created';
 				showDownloadOverlay = true;
 			})
 			.catch(function (error) {
@@ -54,6 +59,13 @@
 {#if showDownloadOverlay}
 	<DownloadOverlay {img} {closeOverlay} />
 {/if}
+<div class="image-tile-container">
+	<div id="image-tile" class="tile {tiles[2] ? tiles[2].theme : ''}">
+		<div class="spacer" />
+		<div class="text">{customTextOn ? customText : tiles[2] ? tiles[2].text : 'Loading...'}</div>
+		<div class="hashtag">#NOTMUTEONCLIMATE</div>
+	</div>
+</div>
 <div class="gallery-container">
 	<div class="black-box" />
 	<div class="arrows">
@@ -80,6 +92,7 @@
 	<input bind:value={customText} type="text" placeholder="Share the action you take" />
 {/if}
 
+{status}
 <div on:click={() => handleDownload()} class="download-button">Download your tile to share</div>
 
 <style lang="scss">
@@ -248,5 +261,21 @@
 		outline: 0;
 		margin: -40px 20px 40px;
 		text-transform: uppercase;
+	}
+
+	#image-tile {
+		width: 800px;
+		height: 800px;
+		padding: 40px;
+		.text {
+			font-size: 100px;
+			line-height: 100%;
+		}
+		.hashtag {
+			font-size: 50px;
+		}
+		.spacer {
+			height: 50px;
+		}
 	}
 </style>

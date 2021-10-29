@@ -25,13 +25,13 @@
 		position: relative;
 		background-color: var(--white);
 		margin: 0 -20px;
-		overflow: hidden;
+		overflow-x: scroll;
 	}
 
 	.marquee {
 		background-color: var(--white);
 		position: absolute;
-		animation: marquee 25s linear infinite;
+		// animation: marquee 25s linear infinite;
 	}
 
 	.grid {

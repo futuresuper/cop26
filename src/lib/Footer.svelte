@@ -27,6 +27,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: flex-end;
+		margin-bottom: 120px;
 	}
 	.text {
 		max-width: 44%;

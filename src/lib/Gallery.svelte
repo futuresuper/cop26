@@ -38,7 +38,7 @@
 		var node = document.getElementById('image-tile');
 
 		htmlToImage
-			.toPng(node)
+			.toJpeg(node)
 			.then(function (dataUrl) {
 				status = 'got data url - creating image';
 				img = dataUrl;

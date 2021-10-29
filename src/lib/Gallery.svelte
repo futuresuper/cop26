@@ -3,9 +3,8 @@
 	import DownloadOverlay from './DownloadOverlay.svelte';
 	import Arrow from './Arrow.svelte';
 
-	export let allTiles;
+	export let allTiles = [];
 	let showDownloadOverlay = false;
-
 	export let customTextOn = false;
 	let customText = '';
 
@@ -40,9 +39,6 @@
 			.then(function (dataUrl) {
 				img = new Image();
 				img.src = dataUrl;
-				// console.log(img);
-				// downloadTile = img;
-				// document.getElementById('download-tile-container').appendChild(img);
 				showDownloadOverlay = true;
 			})
 			.catch(function (error) {
@@ -71,9 +67,9 @@
 	<div class="gallery">
 		{#each tiles as tile, i}
 			<div class="tile-container">
-				<div id="tile-{i}" class="tile {tile.theme}">
+				<div id="tile-{i}" class="tile {tile ? tile.theme : ''}">
 					<div class="spacer" />
-					<div class="text">{customTextOn ? customText : tile.text}</div>
+					<div class="text">{customTextOn ? customText : tile ? tile.text : 'Loading...'}</div>
 					<div class="hashtag">#NOTMUTEONCLIMATE</div>
 				</div>
 			</div>
@@ -189,6 +185,7 @@
 		padding: 2vw;
 		user-select: none;
 		text-transform: uppercase;
+		line-height: 90%;
 
 		&.ball {
 			background-image: url('/images/ball.png');

@@ -1,41 +1,13 @@
 <script>
 	import Gallery from '$lib/Gallery.svelte';
-	import Grid from '$lib/Grid.svelte';
 
-	export let selected = false;
-
-	let allTiles = [
-		{
-			text: '17 MILLION AUSSIES WANT CLIMATE ACTION. RAISE YOUR VOICE AND SHOW THEM HOW.',
-			theme: 'ball'
-		},
-		{ text: 'ACTIONS SPEAK LOUDER THAN WORDS.', theme: 'smudge' },
-		{ text: 'EVERYONE THAT SEES THIS CAN BE A CLIMATE LEADER', theme: 'rally' },
-		{ text: 'LET’S GET AUSTRALIA’S TRUE CLIMATE LEADERS TRENDING DURING COP26', theme: 'white' },
-		{ text: 'TAG A MATE WHOS TAKING CLIMATE ACTION', theme: 'black' }
-	];
-
-	let wallTiles = [];
-
-	import { onMount } from 'svelte';
-	onMount(async () => {
-		const url = 'https://67l8qspd50.execute-api.ap-southeast-2.amazonaws.com/prod/coptiles';
-		fetch(url, { method: 'GET' })
-			.then(function (response) {
-				return response.json();
-			})
-			.then(function (data) {
-				allTiles = data.prefilled;
-				wallTiles = data.wall;
-				console.log(data.wall);
-			});
-	});
+	export let customTileMode = false;
+	export let allTiles = [];
 
 	let customTextOn;
-	let customText;
 	function handleToggle() {
-		selected = !selected;
-		if (selected) {
+		customTileMode = !customTileMode;
+		if (customTileMode) {
 			customTextOn = true;
 		} else {
 			customTextOn = false;
@@ -44,15 +16,14 @@
 </script>
 
 <div class="toggle" on:click={() => handleToggle()}>
-	<div class="item {!selected ? 'selected' : ''}">Pre-filled actions</div>
-	<div class="item {selected ? 'selected' : ''}">Share my own</div>
+	<div class="item {!customTileMode ? 'selected' : ''}">Pre-filled actions</div>
+	<div class="item {customTileMode ? 'selected' : ''}">Share my own</div>
 </div>
 <Gallery {allTiles} {customTextOn} />
 <div class="text">
 	Australia is
 	<div class="hashtag">#NOTMUTEONCLIMATE</div>
 </div>
-<Grid {wallTiles} />
 
 <style lang="scss">
 	.toggle {

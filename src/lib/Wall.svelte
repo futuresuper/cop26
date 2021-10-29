@@ -1,5 +1,6 @@
 <script>
 	export let wallTiles = [];
+	export let userTiles = [];
 </script>
 
 <section>

@@ -28,19 +28,16 @@
 		} else {
 			selectedTile = i;
 		}
-		updateSvg();
 	}
 
-	let img;
-	let svgImg;
-	let status = 'not started';
-
-	function getImgUrl(el) {
-		console.log(el);
+	let img = '/images/loading.gif';
+	let loading = true;
+	function handleDownload() {
 		fetch('https://67l8qspd50.execute-api.ap-southeast-2.amazonaws.com/prod/image', {
 			method: 'post',
 			body: JSON.stringify({
-				image: el
+				text: tiles[2].text,
+				theme: tiles[2].theme
 			})
 		})
 			.then(function (response) {
@@ -49,58 +46,7 @@
 			.then(function (data) {
 				console.log(data);
 				img = data;
-			});
-	}
-
-	function handleDownload() {
-		var node = document.getElementById('image-tile2');
-		htmlToImage
-			.toPng(node)
-			.then(function (dataUrl) {
-				status = 'got data url - creating image';
-				img = dataUrl;
-				getImgUrl(dataUrl);
-
-				// dataU = dataUrl;
-				// let newImg = new Image();
-				// newImg.src = dataUrl;
-
-				// img = newImg;
-				// status = 'Image created';
-				// document.getElementById('test-container').appendChild(img);
-				// showDownloadOverlay = true;
-			})
-			.catch(function (error) {
-				console.error('oops, something went wrong!', error);
-			});
-	}
-
-	function updateSvg() {
-		status = 'getting dl ready';
-		var node = document.getElementById('image-tile');
-
-		htmlToImage
-			.toCanvas(node)
-			.then(function (canvas) {
-				document.getElementById('test-container').appendChild(canvas);
-				// status = 'got data url - creating image';
-				// svgImg = dataUrl;
-				// console.log(dataUrl);
-				// let newImg = new Image();
-				// newImg.src = dataUrl;
-				// getImgUrl(newImg);
-
-				// dataU = dataUrl;
-				// let newImg = new Image();
-				// newImg.src = dataUrl;
-
-				// img = newImg;
-				// status = 'Image created';
-				// document.getElementById('test-container').appendChild(img);
-				// showDownloadOverlay = true;
-			})
-			.catch(function (error) {
-				console.error('oops, something went wrong!', error);
+				loading = false;
 			});
 	}
 
@@ -110,18 +56,8 @@
 </script>
 
 {#if showDownloadOverlay}
-	<DownloadOverlay {img} {closeOverlay} />
+	<DownloadOverlay {img} {closeOverlay} {loading} />
 {/if}
-<div class="image-tile-container">
-	<div id="image-tile" class="tile {tiles[2] ? tiles[2].theme : ''}">
-		<div class="spacer" />
-		<div class="text">{customTextOn ? customText : tiles[2] ? tiles[2].text : 'Loading...'}</div>
-		<div class="hashtag">#NOTMUTEONCLIMATE</div>
-	</div>
-	<div id="image-tile2">
-		<img src={svgImg} alt="this" />
-	</div>
-</div>
 <div class="gallery-container">
 	<div class="black-box" />
 	<div class="arrows">
@@ -147,12 +83,6 @@
 {#if customTextOn}
 	<input bind:value={customText} type="text" placeholder="Share the action you take" />
 {/if}
-
-<p>STATUS: {status}</p>
-<p>DATA: {img}</p>
-<div id="test-container">
-	<!-- <img id="theSvg" src={img} alt="Your tile ready to download" style="height: 100px;width:100px" /> -->
-</div>
 
 <div on:click={() => handleDownload()} class="download-button">Download your tile to share</div>
 

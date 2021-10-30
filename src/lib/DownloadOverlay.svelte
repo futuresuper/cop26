@@ -1,24 +1,9 @@
 <script>
-	import { onMount } from 'svelte';
 	import Cross from './Cross.svelte';
 
 	export let img;
 	export let closeOverlay;
-
-	onMount(async () => {
-		const container = document.getElementById('image-container');
-		if (img) {
-			img.style.width = '40vh';
-			img.style.height = '40vh';
-			img.style.maxWidth = '100%';
-			container.appendChild(img);
-		}
-	});
-
-	if (img) {
-		const el = document.getElementById('image-container');
-		console.log(el);
-	}
+	export let loading;
 
 	let width;
 	let mobile;
@@ -45,7 +30,10 @@
 			<Cross />
 		</div>
 	</div>
-	<div id="image-container" />
+	<img src={img} alt="Your tile is ready to save and share" />
+	{#if loading}
+		<p class="loading">Loading...</p>
+	{/if}
 
 	{#if mobile}
 		<h3>How to download and share</h3>
@@ -87,11 +75,6 @@
 		cursor: pointer;
 	}
 
-	h2 {
-		font-size: max(3vw, 28px);
-		margin-top: 20px;
-		text-transform: uppercase;
-	}
 	h3 {
 		font-size: max(1.6vw, 20px);
 		margin-top: 40px;

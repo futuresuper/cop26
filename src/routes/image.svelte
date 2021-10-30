@@ -23,10 +23,11 @@
 </script>
 
 <section>
-	Original Tile
-	<div id="image-tile" class="tile {theme ? theme : ''}">
+	<div id="image-tile" class="tile {theme ? theme : 'ball'}">
 		<div class="spacer" />
-		<div class="text">{text ? text : 'waiting'}</div>
+		<div class="text">
+			{text ? text : 'LET’S GET AUSTRALIA’S TRUE CLIMATE LEADERS TRENDING DURING COP26.'}
+		</div>
 		<div class="hashtag">#NOTMUTEONCLIMATE</div>
 	</div>
 </section>
@@ -59,21 +60,40 @@
 			background-size: cover;
 			color: black;
 		}
+		&.rally {
+			background-image: url('/images/rally.png');
+			background-size: cover;
+			color: white;
+		}
+		&.white {
+			background-image: url('/images/bw-smudge.png');
+			background-size: cover;
+			color: white;
+		}
+		&.black {
+			background-color: black;
+			color: white;
+			border: 1px solid white;
+		}
+		&.blue {
+			background-color: var(--blue);
+			color: white;
+		}
 	}
 
 	#image-tile {
-		width: 200px;
-		height: 200px;
-		padding: 10px;
+		width: 800px;
+		height: 800px;
+		padding: 40px;
 		.text {
-			font-size: 25px;
+			font-size: 100px;
 			line-height: 100%;
 		}
 		.hashtag {
-			font-size: 12px;
+			font-size: 50px;
 		}
 		.spacer {
-			height: 12px;
+			height: 50px;
 		}
 	}
 </style>

@@ -1,20 +1,32 @@
 <script>
 	import { onMount } from 'svelte';
 
-	let text = 'Too soon';
-	let theme = 'none';
+	let text;
+	let theme;
 
 	onMount(async () => {
-		text = 'It worked';
-		theme = 'ball';
+		text = getQueryParam('text');
+		theme = getQueryParam('theme');
 	});
+
+	function getQueryParam(variable) {
+		var query = window.location.search.substring(1);
+		var vars = query.split('&');
+		for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split('=');
+			if (decodeURIComponent(pair[0]) == variable) {
+				console.log(decodeURIComponent(pair[1]));
+				return decodeURIComponent(pair[1]);
+			}
+		}
+	}
 </script>
 
 <section>
 	Original Tile
-	<div id="image-tile" class="tile {theme}">
+	<div id="image-tile" class="tile {theme ? theme : ''}">
 		<div class="spacer" />
-		<div class="text">{text}</div>
+		<div class="text">{text ? 'text' : 'waiting'}</div>
 		<div class="hashtag">#NOTMUTEONCLIMATE</div>
 	</div>
 </section>
@@ -39,6 +51,11 @@
 
 		&.ball {
 			background-image: url('/images/ball.png');
+			background-size: cover;
+			color: black;
+		}
+		&.smudge {
+			background-image: url('/images/smudge.png');
 			background-size: cover;
 			color: black;
 		}

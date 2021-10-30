@@ -26,7 +26,7 @@
 	Original Tile
 	<div id="image-tile" class="tile {theme ? theme : ''}">
 		<div class="spacer" />
-		<div class="text">{text ? 'text' : 'waiting'}</div>
+		<div class="text">{text ? text : 'waiting'}</div>
 		<div class="hashtag">#NOTMUTEONCLIMATE</div>
 	</div>
 </section>

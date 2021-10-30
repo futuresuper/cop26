@@ -64,6 +64,11 @@
 		align-items: center;
 	}
 
+	img {
+		width: 200px;
+		height: 200px;
+	}
+
 	.close-container {
 		width: 100%;
 		display: flex;

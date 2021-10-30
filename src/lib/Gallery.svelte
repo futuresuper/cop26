@@ -33,6 +33,7 @@
 	let img = '/images/loading.gif';
 	let loading = true;
 	function handleDownload() {
+		showDownloadOverlay = true;
 		fetch('https://67l8qspd50.execute-api.ap-southeast-2.amazonaws.com/prod/image', {
 			method: 'post',
 			body: JSON.stringify({
@@ -44,7 +45,6 @@
 				return response.json();
 			})
 			.then(function (data) {
-				console.log(data);
 				img = data;
 				loading = false;
 			});
@@ -52,6 +52,7 @@
 
 	const closeOverlay = () => {
 		showDownloadOverlay = false;
+		img = '/images/loading.gif';
 	};
 </script>
 

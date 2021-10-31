@@ -27,25 +27,16 @@
 				wallTiles = data.wall;
 				orgs = data.orgs;
 			});
-		if (window.location.hostname.includes('notmuteonclimate.com')) {
-			hideSite = true;
-		} else {
-			hideSite = false;
-		}
 	});
 </script>
 
 <div class="container">
-	{#if hideSite}
-		<h1>Coming soon...</h1>
-	{:else}
-		<Header />
-		<Tiles {allTiles} />
-		<Wall {userTiles} {wallTiles} />
-		<Orgs {orgs} />
-		<Info />
-		<Footer />
-	{/if}
+	<Header />
+	<Tiles {allTiles} />
+	<Wall {userTiles} {wallTiles} />
+	<Orgs {orgs} />
+	<Info />
+	<Footer />
 </div>
 
 <style lang="scss">

@@ -1,5 +1,4 @@
 <script>
-	import * as htmlToImage from 'html-to-image';
 	import DownloadOverlay from './DownloadOverlay.svelte';
 	import Arrow from './Arrow.svelte';
 
@@ -34,10 +33,12 @@
 	let loading = true;
 	function handleDownload() {
 		showDownloadOverlay = true;
+		loading = true;
+		img = '/images/loading.gif';
 		fetch('https://67l8qspd50.execute-api.ap-southeast-2.amazonaws.com/prod/image', {
 			method: 'post',
 			body: JSON.stringify({
-				text: tiles[2].text,
+				text: customTextOn ? customText : tiles[2].text,
 				theme: tiles[2].theme
 			})
 		})
@@ -52,7 +53,6 @@
 
 	const closeOverlay = () => {
 		showDownloadOverlay = false;
-		img = '/images/loading.gif';
 	};
 </script>
 

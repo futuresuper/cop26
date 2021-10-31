@@ -1,15 +1,26 @@
 <script>
+	import Arrow from './Arrow.svelte';
+
 	export let wallTiles = [];
 	export let userTiles = [];
+
+	let allTiles = [];
+
+	$: if (wallTiles || userTiles) {
+		allTiles = [...wallTiles, ...userTiles, ...wallTiles, ...userTiles, ...wallTiles, ...userTiles];
+		console.log(userTiles);
+	}
 </script>
 
 <section>
 	<div class="marquee">
 		<div class="grid">
-			{#each wallTiles as item}
+			{#each allTiles as item}
 				<div
 					class="item-container"
-					style="grid-column: span {item.cols}; grid-row: span {item.rows};"
+					style="grid-column: span {item.cols ? item.cols : 1}; grid-row: span {item.rows
+						? item.rows
+						: 1};"
 				>
 					<img src={item.src} alt={item.desc} />
 				</div>
@@ -31,7 +42,7 @@
 	.marquee {
 		background-color: var(--white);
 		position: absolute;
-		// animation: marquee 25s linear infinite;
+		animation: marquee 120s linear infinite;
 	}
 
 	.grid {
@@ -47,7 +58,6 @@
 	.item-container {
 		width: 100%;
 		height: 100%;
-		// background-color: salmon;
 	}
 
 	img {
@@ -60,18 +70,18 @@
 			left: 0px;
 		}
 		100% {
-			left: -100vw;
+			left: -350vw;
 		}
 	}
 
 	@media (max-width: 700px) {
 		section {
-			height: calc(150vw + 80px);
+			height: calc(108vw + 70px);
 		}
 
 		.grid {
-			grid-auto-columns: 30vw;
-			grid-template-rows: repeat(5, 30vw);
+			grid-auto-columns: 27vw;
+			grid-template-rows: repeat(4, 27vw);
 			grid-gap: 10px;
 			grid-auto-flow: column dense;
 		}

@@ -1,5 +1,11 @@
 <h1>NOT MUTE ON CLIMATE</h1>
-<img src="/images/vid.png" alt="Not mute on climate" />
+<iframe
+	src="https://www.youtube.com/embed/9yH8LJuurbA"
+	title="YouTube video player"
+	frameborder="0"
+	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+	allowfullscreen
+/>
 <div class="text">
 	<p>Australians want climate action.</p>
 	<p>But our true leaders aren’t at COP26. We’re at home.</p>
@@ -18,8 +24,9 @@
 </div>
 
 <style lang="scss">
-	img {
-		max-width: 100%;
+	iframe {
+		width: 100%;
+		height: calc(96vw * 9 / 16);
 	}
 
 	h1 {

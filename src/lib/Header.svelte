@@ -1,11 +1,14 @@
 <h1>NOT MUTE ON CLIMATE</h1>
-<iframe
-	src="https://www.youtube.com/embed/9yH8LJuurbA"
-	title="YouTube video player"
-	frameborder="0"
-	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-	allowfullscreen
-/>
+<div class="vid-container">
+	<iframe
+		src="https://www.youtube.com/embed/9yH8LJuurbA?autoplay=1"
+		title="YouTube video player"
+		frameborder="0"
+		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+		allowfullscreen
+	/>
+</div>
+
 <div class="text">
 	<p>Australians want climate action.</p>
 	<p>But our true leaders aren’t at COP26. We’re at home.</p>
@@ -24,14 +27,21 @@
 </div>
 
 <style lang="scss">
+	.vid-container {
+		display: flex;
+		justify-content: center;
+	}
+
 	iframe {
 		width: 100%;
+		max-width: 800px;
 		height: calc(96vw * 9 / 16);
+		max-height: 450px;
 	}
 
 	h1 {
 		font-size: 15vw;
-		margin-bottom: 14vw;
+		margin-bottom: 8vw;
 		line-height: 80%;
 	}
 

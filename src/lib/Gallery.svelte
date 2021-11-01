@@ -29,26 +29,30 @@
 		}
 	}
 
+	let downloadPressed = false;
 	let img = '/images/loading.gif';
 	let loading = true;
 	function handleDownload() {
-		showDownloadOverlay = true;
-		loading = true;
-		img = '/images/loading.gif';
-		fetch('https://67l8qspd50.execute-api.ap-southeast-2.amazonaws.com/prod/image', {
-			method: 'post',
-			body: JSON.stringify({
-				text: customTextOn ? customText : tiles[2].text,
-				theme: tiles[2].theme
+		downloadPressed = true;
+		if (!customTextOn || customText) {
+			showDownloadOverlay = true;
+			loading = true;
+			img = '/images/loading.gif';
+			fetch('https://67l8qspd50.execute-api.ap-southeast-2.amazonaws.com/prod/image', {
+				method: 'post',
+				body: JSON.stringify({
+					text: customTextOn ? encodeURIComponent(customText) : encodeURIComponent(tiles[2].text),
+					theme: tiles[2].theme
+				})
 			})
-		})
-			.then(function (response) {
-				return response.json();
-			})
-			.then(function (data) {
-				img = data;
-				loading = false;
-			});
+				.then(function (response) {
+					return response.json();
+				})
+				.then(function (data) {
+					img = data;
+					loading = false;
+				});
+		}
 	}
 
 	const closeOverlay = () => {
@@ -83,6 +87,9 @@
 </div>
 {#if customTextOn}
 	<input bind:value={customText} type="text" placeholder="Share the action you take" />
+	{#if downloadPressed && customTextOn && !customText}
+		<p class="warning">☝️ Please add your action first</p>
+	{/if}
 {/if}
 
 <div on:click={() => handleDownload()} class="download-button">Download your tile to share</div>
@@ -274,5 +281,10 @@
 	#image-tile2 {
 		width: 800px;
 		height: 800px;
+	}
+
+	.warning {
+		color: coral;
+		text-align: center;
 	}
 </style>

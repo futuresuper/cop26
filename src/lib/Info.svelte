@@ -45,7 +45,7 @@
 		</p>
 		<p>
 			We’re turning the volume up on all the things Aussies do during the COP26 climate summit, to
-			reach the 17 million people who want more climate action in this country.
+			reach the 75% of people who want more climate action in this country.
 		</p>
 
 		<p>Our actions are louder than our government’s silence.</p>

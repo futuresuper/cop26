@@ -78,9 +78,11 @@
 		justify-content: center;
 		align-items: center;
 		text-align: center;
+
 		padding: 5vw;
 		p {
 			margin: 8px 0;
+			font-size: max(13px, 1.3vw);
 		}
 	}
 	.what-is {
@@ -96,17 +98,12 @@
 		color: var(--black);
 		padding: 20px;
 		p {
-			font-size: 12px;
+			font-size: max(13px, 1.3vw);
 			margin-top: 0;
 		}
 	}
 
 	@media (max-width: 700px) {
-		section {
-			grid-template-columns: 1fr 3fr;
-			border-top: 1px solid var(--black);
-			border-bottom: 1px solid var(--black);
-		}
 		.circle {
 			min-height: 25vw;
 			font-size: 20vw;

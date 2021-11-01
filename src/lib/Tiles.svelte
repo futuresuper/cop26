@@ -66,5 +66,9 @@
 		.item {
 			font-size: 4vw;
 		}
+
+		.toggle {
+			height: 40px;
+		}
 	}
 </style>

@@ -89,7 +89,7 @@
 
 	.are-not-mute,
 	.name {
-		font-size: max(3vw, 40px);
+		font-size: max(3vw, 20px);
 		font-family: var(--knockout);
 		text-transform: uppercase;
 		line-height: 100%;

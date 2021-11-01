@@ -41,8 +41,6 @@
 
 <style lang="scss">
 	.container {
-		max-width: 1440px;
-		margin: 0 auto;
 		padding: 0 20px;
 	}
 </style>

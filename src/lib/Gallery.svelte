@@ -287,4 +287,15 @@
 		color: coral;
 		text-align: center;
 	}
+
+	@media (max-width: 700px) {
+		.gallery-container {
+			margin: 40px -20px 40px -20px;
+		}
+
+		.download-button {
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+	}
 </style>

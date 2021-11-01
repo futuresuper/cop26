@@ -33,6 +33,6 @@
 	}
 	.text {
 		max-width: 44%;
-		font-size: 12px;
+		font-size: max(13px, 1.3vw);
 	}
 </style>

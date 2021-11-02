@@ -9,7 +9,7 @@
 				href="https://www.futuresuper.com.au/?utm_source=NotMuteOnClimate">Future Super</a
 			>, which is the founding business of Not Mute On Climate. All information received is handled
 			in accordance with Future Super's Privacy Policy. For general enquiries reach out at
-			info@notbusinessasusual.co
+			info@futuresuper.com.au
 		</p>
 		<p>We acknowledge the Traditional Owners of the land on which we work and live.</p>
 		<p>

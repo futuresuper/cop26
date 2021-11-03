@@ -86,7 +86,7 @@
 	</div>
 </div>
 {#if customTextOn}
-	<input bind:value={customText} type="text" placeholder="Share the action you take" />
+	<input bind:value={customText} type="text" placeholder="Write your climate action message here" />
 	{#if downloadPressed && customTextOn && !customText}
 		<p class="warning">☝️ Please add your action first</p>
 	{/if}
